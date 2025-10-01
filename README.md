@@ -17,21 +17,30 @@ This project is a **single-page application (SPA)** that allows users to:
   - **FAISS** (local in-memory, no Docker required)
   - **Weaviate** (via Docker, REST API)
   
-## Project Structure
-project-root/ \n
-├─ venv (Virtual Environment Python 3.12.10. But, it is not included in git repository.) \n
-├─ backend/ \n
-│ ├─ app/ \n
-│ │ ├─ main.py # FastAPI endpoints \n
-│ │ ├─ extractor.py # HTML parsing + chunking \n
-│ │ ├─ vector_search.py # FAISS search \n
-│ │ ├─ vector_store_weaviate.py # Weaviate integration \n
-│ ├─ requirements.txt \n
-├─ frontend/ (React Vite app) \n
-├─ docker-compose.yml (Weaviate setup) \n
-├─ slides \n
-  ├─ Fullstack Developer - Async test(3 hrs) .docx \n
-  ├─ slides.pdf \n
+project-root/
+├── .gitignore
+├── README.md
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py              # FastAPI endpoints
+│   │   ├── extractor.py         # HTML parsing + chunking
+│   │   ├── vector_search.py     # FAISS search
+│   │   └── vector_store_weaviate.py  # Weaviate integration
+│   ├── requirements.txt
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   └── src/
+│       ├── App.jsx
+│       ├── main.jsx
+│       └── components/
+├── docker-compose.yml           # Weaviate setup
+└── slides/
+    ├── Fullstack Developer - Async test(3 hrs).docx
+    └── slides.pdf
+
 
 
 
