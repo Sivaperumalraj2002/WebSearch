@@ -11,7 +11,7 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8000/search", { url, query });
+      const res = await axios.post("http://localhost:8000/searchWeaviate", { url, query });
       setResults(res.data.results || []);
     } catch (err) {
       alert("Search failed: " + (err.response?.data?.detail || err.message));

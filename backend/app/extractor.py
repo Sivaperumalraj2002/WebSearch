@@ -1,10 +1,10 @@
-# backend/app/extractor.py
 from bs4 import BeautifulSoup
 import requests
+from transformers import AutoTokenizer
 
-SANE_TAGS = ["p","div","li","article","section","h1","h2","h3","h4","h5","h6","td","pre"]
+usefull_tag = ["p","div","li","article","section","h1","h2","h3","h4","h5","h6","td","pre"]
 
-def fetch_html(url, timeout=10):
+def fetch_html(url, timeout=20):
     headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"}
     r = requests.get(url, headers=headers, timeout=timeout)
     r.raise_for_status()
@@ -12,22 +12,19 @@ def fetch_html(url, timeout=10):
 
 def parse_elements(html):
     soup = BeautifulSoup(html, "html.parser")
-    # remove scripts/styles
+    # remove scripts & styles
     for s in soup(["script","style","noscript","iframe"]):
         s.decompose()
     body = soup.body or soup
     elems = []
-    for tag in body.find_all(SANE_TAGS):
+    for tag in body.find_all(usefull_tag):
         text = tag.get_text(separator=" ", strip=True)
         if not text:
             continue
-        # store both text and the HTML snippet (for display)
         elems.append({"text": text, "html": str(tag)})
     return elems
 
 
-# backend/app/extractor.py  (append)
-from transformers import AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2", use_fast=True)
 
@@ -41,7 +38,7 @@ def chunk_elements(elements, max_tokens=500):
         tok_ids = tokenizer.encode(el["text"], add_special_tokens=False)
         tcount = len(tok_ids)
         if tcount > max_tokens:
-            # element itself too large: do a simple break into pieces by words (fallback)
+            # element itself too large
             words = el["text"].split()
             cur = []
             for w in words:

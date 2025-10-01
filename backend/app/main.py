@@ -6,6 +6,8 @@ from .extractor import fetch_html, parse_elements, chunk_elements, tokenizer
 from .vector_search import embed_texts, build_faiss_index, search_index, model
 import numpy as np
 
+from .vector_store_weaviate import upsert_chunks, search_query
+
 app = FastAPI()
 
 # Allow frontend dev server
@@ -14,6 +16,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5174",
         "http://127.0.0.1:5174",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
     ],
@@ -26,12 +30,38 @@ class SearchRequest(BaseModel):
     url: str
     query: str
 
+# search with Weaviate
+@app.post("/searchWeaviate")
+async def search_weaviate(req: SearchRequest):
+    try:
+        html = fetch_html(req.url)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to fetch URL: {e}")
+
+    try:
+        elements = parse_elements(html)
+        chunks = chunk_elements(elements, max_tokens=500)
+        if not chunks:
+            return {"results": []}
+
+        # Index into Weaviate
+        upsert_chunks(chunks, req.url)
+
+        # Semantic search
+        hits = search_query(req.query, top_k=10)
+
+        return {"results": hits}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Weaviate operation failed: {e}")
+
+# health check
 @app.get("/health")
 async def health():
     return {"status": "ok"}
 
-@app.post("/search")
-async def search(req: SearchRequest):
+# search with FAISS
+@app.post("/searchFAISS")
+async def search_faiss(req: SearchRequest):
     print(req)
     try:
         html = fetch_html(req.url)
@@ -40,12 +70,14 @@ async def search(req: SearchRequest):
 
     elements = parse_elements(html)
     chunks = chunk_elements(elements, max_tokens=500)
+    # print(chunks)
     texts = [c["text"] for c in chunks]
     if not texts:
         return {"results": []}
 
     # embeddings
     embeddings = embed_texts(texts)
+    # print(len(embeddings[0]))
     index = build_faiss_index(embeddings)
 
     # query embedding
@@ -54,13 +86,13 @@ async def search(req: SearchRequest):
 
     results = []
     for dist, idx in zip(D, I):
-        score = float(dist)   # lower = closer for L2
+        # lower value loser for L2
+        score = float(dist)   
         results.append({
             "text": texts[idx],
             "html": chunks[idx]["html"],
             "score": score
         })
 
-    # Sort by score ascending (closest first)
     results = sorted(results, key=lambda r: r["score"])
     return {"results": results[:10]}
