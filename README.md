@@ -18,20 +18,20 @@ This project is a **single-page application (SPA)** that allows users to:
   - **Weaviate** (via Docker, REST API)
   
 ## Project Structure
-project-root/
-├─ venv (Virtual Environment Python 3.12.10. But, it is not included in git repository.)
-├─ backend/
-│ ├─ app/
-│ │ ├─ main.py # FastAPI endpoints
-│ │ ├─ extractor.py # HTML parsing + chunking
-│ │ ├─ vector_search.py # FAISS search
-│ │ ├─ vector_store_weaviate.py # Weaviate integration
-│ ├─ requirements.txt
-├─ frontend/ (React Vite app)
-├─ docker-compose.yml (Weaviate setup)
-├─ slides
-  ├─ Fullstack Developer - Async test(3 hrs) .docx
-  ├─ slides.pdf
+project-root/ \n
+├─ venv (Virtual Environment Python 3.12.10. But, it is not included in git repository.) \n
+├─ backend/ \n
+│ ├─ app/ \n
+│ │ ├─ main.py # FastAPI endpoints \n
+│ │ ├─ extractor.py # HTML parsing + chunking \n
+│ │ ├─ vector_search.py # FAISS search \n
+│ │ ├─ vector_store_weaviate.py # Weaviate integration \n
+│ ├─ requirements.txt \n
+├─ frontend/ (React Vite app) \n
+├─ docker-compose.yml (Weaviate setup) \n
+├─ slides \n
+  ├─ Fullstack Developer - Async test(3 hrs) .docx \n
+  ├─ slides.pdf \n
 
 
 
