@@ -17,6 +17,9 @@ This project is a **single-page application (SPA)** that allows users to:
   - **FAISS** (local in-memory, no Docker required)
   - **Weaviate** (via Docker, REST API)
   
+ ## Video Reference 
+ Google Drive link - https://drive.google.com/file/d/1P0AoXdn5iD52AeKfwcPqG_8OSbsP8Vli/view?usp=sharing
+  
 project-root/
 ├── .gitignore
 ├── README.md
