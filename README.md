@@ -22,29 +22,29 @@ This project is a **single-page application (SPA)** that allows users to:
 
 
 ## Projet Structure
-project/
-├── .gitignore
-├── README.md
-├── backend/
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py              # FastAPI endpoints
-│   │   ├── extractor.py         # HTML parsing + chunking
-│   │   ├── vector_search.py     # FAISS search
-│   │   └── vector_store_weaviate.py  # Weaviate integration
-│   ├── requirements.txt
-├── frontend/
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── public/
-│   └── src/
-│       ├── App.jsx
-│       ├── main.jsx
-│       └── components/
-├── docker-compose.yml           # Weaviate setup
-└── slides/
-    ├── Fullstack Developer - Async test(3 hrs).docx
-    └── slides.pdf
+#### project/
+#### ├── .gitignore
+#### ├── README.md
+#### ├── backend/
+#### │   ├── app/
+#### │   │   ├── __init__.py
+#### │   │   ├── main.py              # FastAPI endpoints
+#### │   │   ├── extractor.py         # HTML parsing + chunking
+#### │   │   └── vector_store_weaviate.py  # Weaviate integration
+#### │   │   ├── vector_search.py     # FAISS search
+#### │   ├── requirements.txt
+#### ├── frontend/
+#### │   ├── package.json
+#### │   ├── vite.config.js
+#### │   ├── public/
+#### │   └── src/
+#### │       ├── App.jsx
+#### │       ├── main.jsx
+#### │       └── components/
+#### ├── docker-compose.yml           # Weaviate setup
+#### └── slides/
+####     ├── Fullstack Developer - Async test(3 hrs).docx
+####     └── slides.pdf
 
 
 
