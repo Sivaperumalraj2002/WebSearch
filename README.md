@@ -20,34 +20,33 @@ This project is a **single-page application (SPA)** that allows users to:
  ## Video Reference 
  Google Drive link - https://drive.google.com/file/d/1P0AoXdn5iD52AeKfwcPqG_8OSbsP8Vli/view?usp=sharing
 
+## Project Structure
 
-## Projet Structure
-#### project/
-#### ├── .gitignore
-#### ├── README.md
-#### ├── backend/
-#### │   ├── app/
-#### │   │   ├── __init__.py
-#### │   │   ├── main.py              # FastAPI endpoints
-#### │   │   ├── extractor.py         # HTML parsing + chunking
-#### │   │   └── vector_store_weaviate.py  # Weaviate integration
-#### │   │   ├── vector_search.py     # FAISS search
-#### │   ├── requirements.txt
-#### ├── frontend/
-#### │   ├── package.json
-#### │   ├── vite.config.js
-#### │   ├── public/
-#### │   └── src/
-#### │       ├── App.jsx
-#### │       ├── main.jsx
-#### │       └── components/
-#### ├── docker-compose.yml           # Weaviate setup
-#### └── slides/
-####     ├── Fullstack Developer - Async test(3 hrs).docx
-####     └── slides.pdf
-
-
-
+```text
+project/
+├── .gitignore
+├── README.md
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py              # FastAPI endpoints
+│   │   ├── extractor.py         # HTML parsing + chunking
+│   │   └── vector_store_weaviate.py  # Weaviate integration
+│   │   ├── vector_search.py     # FAISS search
+│   ├── requirements.txt
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── public/
+│   └── src/
+│       ├── App.jsx
+│       ├── main.jsx
+│       └── components/
+├── docker-compose.yml           # Weaviate setup
+└── slides/
+    ├── Fullstack Developer - Async test(3 hrs).docx
+    └── slides.pdf
+```
 
 ## Setup Instructions
 
